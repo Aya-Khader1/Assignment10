@@ -5,7 +5,7 @@ import * as argon2 from 'argon2'
 import { BadRequestException } from "../response/error.response.js";
 export const generateHash = async({
     plaintext,
-    saltRounds = Number(SALT_ROUND),
+    saltRounds =SALT_ROUND,
     algorithm =HashEnum.Bcrypt
 })=>{
     let hashResults = "";
@@ -39,5 +39,5 @@ export const compareHash = async({
             default:
                 throw BadRequestException("unspported hashing algorithm")
     }
-    return hashResults;
+    return match;
 }

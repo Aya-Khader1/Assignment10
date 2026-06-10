@@ -1,8 +1,9 @@
+import { SALT_ROUND } from "../../../config/config.service.js";
 import { HashEnum } from "../../Utils/enums/security.enum.js";
-import { generateHash } from "../../Utils/security/hash.security.js";
+import { compareHash, generateHash } from "../../Utils/security/hash.security.js";
 import { create, findOne } from "./../../DB/database.repository.js";
 import UserModel from './../../DB/Models/user.model.js'
-import {ConfelictException, NotFoundException} from './../../Utils/response/error.response.js'
+import {BadRequestException, ConfelictException, NotFoundException} from './../../Utils/response/error.response.js'
 import {successResponse} from './../../Utils/response/success.response.js'
 
 
@@ -15,7 +16,8 @@ export const signup =async(req,res)=>{
 
         const hashPassword = await generateHash({
             plaintext:password,
-            algorithm : HashEnum.Argon2
+            saltRounds : Number(SALT_ROUND),
+            algorithm : HashEnum.Bcrypt
         })
 
         const user = await create({
@@ -35,9 +37,15 @@ export const login = async(req,res) =>{
 
     const {email,password} = req.body;
 
-    const user = await findOne({model:UserModel,filter:{email},select:"username email firstName lastName"})
+    const user = await findOne({model:UserModel,filter:{email}})
 
     if(!user) throw NotFoundException('User not found');
+    const isMatched = await compareHash({
+        plaintext : password,
+        ciphertext : user.password,
+        algorithm : HashEnum.Bcrypt
+    })
+    if(!isMatched) throw BadRequestException('Invalid credentials')
 
      successResponse(
        { res,
