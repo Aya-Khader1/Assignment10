@@ -4,7 +4,7 @@ import * as authService from './auth.service.js'
 const router = Router();
 
 router.post('/signup',authService.signup)
-router.get('/login',authService.login)
+router.post('/login',authService.login)
 
 
 export default router;
