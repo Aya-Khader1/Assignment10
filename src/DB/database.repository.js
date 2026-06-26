@@ -19,7 +19,6 @@ export const create = async({
     data,
     options={validateBeforeSave:true}
 }={})=>{
-
     return await model.create(data,options)
 }
 export const createOne = async({
@@ -52,7 +51,7 @@ export const find = async({
     select="",
     options={}
 }={})=>{
-    const doc = model.findById(filter)
+    const doc = model.find(filter)
     if(select.length) doc.select(select);
     if(options.populate) doc.populate(options.populate)
     if(options.lean) doc.lean()
@@ -126,5 +125,5 @@ export const findOneAndDelete = async({
     filter,
 }={})=>{
     return await  model.findOneAndDelete(filter)
-    
+
 }

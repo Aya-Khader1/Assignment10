@@ -2,9 +2,9 @@ import connectDB from "./DB/connection.js";
 import { userRouter,authRouter,messageRouter } from "./Modules/index.js";
 import {globalErrorHandler ,NotFoundException } from "./Utils/response/error.response.js";
 import { successResponse } from "./Utils/response/success.response.js";
-
+import cors from 'cors';
 const bootstrap = async(app,express)=>{
-    app.use(express.json());
+    app.use(express.json(),cors());
     await connectDB()
 
 

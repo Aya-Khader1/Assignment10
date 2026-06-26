@@ -61,5 +61,10 @@ export const TooManyRequestsException =(
 
 export const globalErrorHandler = (err,req,res,next)=>{
     const status = err.status??500;
-    return res.status(status).json({message:err.message,stack:err.stack,status})
+    return res.status(status).json({
+        message:err.message,
+        stack:err.stack,
+        status,
+        extra : err.extra
+    });
 }

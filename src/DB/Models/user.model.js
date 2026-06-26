@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { GenderEnum, ProviderEnum, RoleEnum } from "../../Utils/enums/user.enum.js";
 
 
-const userSchema =new  mongoose.Schema({
+const userSchema =new mongoose.Schema({
     firstName :{
         type : String,
         required : [true,'FirstName is Mandatry'],
@@ -27,7 +27,7 @@ const userSchema =new  mongoose.Schema({
         }
     },
     DOB :Date,
-    phone :Number,
+    phone :String,
     gender:{
         type:Number,
         enum:Object.values(GenderEnum),

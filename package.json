@@ -10,12 +10,25 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@abacritt/angularx-social-login": "^2.6.0",
+    "@angular/common": "^21.2.17",
+    "@angular/core": "^21.2.17",
+    "@angular/platform-browser": "^21.2.17",
+    "@angular/router": "^21.2.17",
     "argon2": "^0.44.0",
     "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "google-auth-library": "^10.7.0",
+    "joi": "^18.2.2",
+    "jsonwebtoken": "^9.0.3",
     "mongodb": "^7.2.0",
-    "mongoose": "^9.6.3"
+    "mongoose": "^9.6.3",
+    "zone.js": "^0.16.2"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "@angular/build": "^21.2.16"
+  }
 }
