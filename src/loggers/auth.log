@@ -1,0 +1,6 @@
+::ffff:127.0.0.1 - - [13/Jul/2026:20:41:21 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 542 "-" "PostmanRuntime/7.54.0"
+::ffff:127.0.0.1 - - [13/Jul/2026:22:22:17 +0000] "POST /api/v1/auth/login HTTP/1.1" 500 273 "-" "PostmanRuntime/7.54.0"
+::ffff:127.0.0.1 - - [13/Jul/2026:22:25:38 +0000] "POST /api/v1/auth/login HTTP/1.1" 200 542 "-" "PostmanRuntime/7.54.0"
+::ffff:127.0.0.1 - - [13/Jul/2026:22:32:40 +0000] "POST /api/v1/auth/logout-with-redis HTTP/1.1" 500 389 "-" "PostmanRuntime/7.54.0"
+::ffff:127.0.0.1 - - [13/Jul/2026:22:38:14 +0000] "POST /api/v1/auth/logout-with-redis HTTP/1.1" 500 527 "-" "PostmanRuntime/7.54.0"
+::ffff:127.0.0.1 - - [13/Jul/2026:22:40:59 +0000] "POST /api/v1/auth/logout-with-redis HTTP/1.1" 200 43 "-" "PostmanRuntime/7.54.0"

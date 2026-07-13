@@ -1,43 +1,66 @@
 import joi from 'joi'
 import { Types } from 'mongoose';
-import { GenderEnum, ProviderEnum, RoleEnum } from "../../Utils/enums/user.enum.js";
+import { generaleFields } from '../../Middlewares/validation.middleware.js';
 
 export const signupSchema ={
     body:joi.object({
-    username : joi.string().min(2).max(25).required(),
-    email:joi.string().email({
-        minDomainSegments:2,
-        maxDomainSegments:5,  
-        tlds:{allow:['com','net','org']}
-    })
-    .required(),
-    password :joi.string().alphanum().required(),
-    confirmPassword : joi.ref("password"),
-    phone : joi.string().pattern(/^(\+20|020|0)?1[0125][0-9]{8}$/).messages({
-        "string.patterns.base" : "Invalid Phone Number Format"
-    }),
+    username :generaleFields.username.required(),
+    email : generaleFields.email.required(),
+    password : generaleFields.password.required(),
+    phone:generaleFields.phone,
+    confirmPassword: generaleFields.confirmPassword,
+    gender : generaleFields.gender,
+    role :generaleFields.role,
+    provider:generaleFields.provider,
+    DOB :generaleFields.DOB,
+    confirmEmail :generaleFields.confirmEmail,
+    profilePic : generaleFields.profilePic,
+    coverPictures:generaleFields.coverPictures
     /*id : joi.string().custom((value,helper)=>{
         return Types.ObjectId.isValid(value) || helper.message('Invalid objectId Format')
     }),*/
-    gender : joi.string().valid(...Object.values(GenderEnum)),
-    role : joi.string().valid(...Object.values(RoleEnum)),
-    provider : joi.string().valid(...Object.values(ProviderEnum)),
-    DOB :joi.string().isoDate(),
-    confirmEmail :joi.string().isoDate(),
-    profilePic : joi.string(),
-    coverPictures:joi.array().items(joi.string())
+    
     }),
 }
 
 export const loginSchema = {
     body : joi.object({
-        email:joi.string().email({
-        minDomainSegments:2,
-        maxDomainSegments:5,
-        tlds:{allow:['com','net','org']}
+    email:generaleFields.email.required(),
+    password :generaleFields.password.required(),
+    rememberMe: joi.boolean().optional()
+
     })
-    .required(),
-    password :joi.string().alphanum().required(),
+}
+
+export const confirmEmailSchema = {
+    body : joi.object({
+    email:generaleFields.email.required(),
+    otp:generaleFields.otp, 
+    rememberMe: joi.boolean().optional()
+
+    })
+}
+
+export const resendEmailSchema = {
+    body : joi.object({
+    email:generaleFields.email.required(),
+    })
+}
+
+export const forgetPasswordSchema = {
+    body : joi.object({
+    email:generaleFields.email.required(),
+    rememberMe: joi.boolean().optional()
+
+    })
+}
+
+export const resetPasswordSchema = {
+    body : joi.object({
+    email:generaleFields.email.required(),
+    newPassword:generaleFields.password.required(),
+    otp:generaleFields.otp, 
+    confirmPassword : joi.ref("newPassword"),
     rememberMe: joi.boolean().optional()
 
     })
