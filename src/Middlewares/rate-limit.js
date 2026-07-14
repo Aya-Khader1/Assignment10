@@ -10,7 +10,7 @@ const blockedIps = new Set();
 const unBlockersTimers = new Map();
 
 const RATE_LIMIT = 3;
-const WINDOWS_MS = 15 * 60 * 1000;
+const WINDOWS_MS = 60 * 1000;
 
 export const customRateLimiter = () => {
   return (req, res, next) => {
